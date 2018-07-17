@@ -39,7 +39,7 @@ private:
 	/*  User Functions              */
 	void DrawTitleScreen(int x, int y);
 	void DrawFace(int x, int y);
-	void DrawPoo(int x, int y);
+	
 	void drawGameOver(int x, int y);
 	/********************************/
 private:
@@ -52,10 +52,10 @@ private:
 	Poo poo1;
 	Poo poo2;
 	bool isStarted = false;
-	int xPos = 100;
-	int yPos = 100;
-	int width = 100;
-	int height = 100;
+	int x0 = 100;
+	int y0 = 100;
+	int x1 = 200;
+	int y1 = 100;
 	/********************************/
 
 };
