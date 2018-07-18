@@ -25,6 +25,7 @@
 #include "Graphics.h"
 #include "Poo.h"
 #include "Dude.h"
+#include <random>
 class Game
 {
 public:
@@ -38,8 +39,7 @@ private:
 	/********************************/
 	/*  User Functions              */
 	void DrawTitleScreen(int x, int y);
-	void DrawFace(int x, int y);
-	
+		
 	void drawGameOver(int x, int y);
 	/********************************/
 private:
@@ -48,14 +48,15 @@ private:
 	/********************************/
 	/*  User Variables              */
 	Dude dude;
-	Poo poo0;
-	Poo poo1;
-	Poo poo2;
+	std::random_device rd;
+	std::mt19937 rng;
+	std::uniform_int_distribution<int> xDist;
+	std::uniform_int_distribution<int> yDist;
+	static constexpr int nPoo = 100;
+	Poo poos[nPoo];
+	
 	bool isStarted = false;
-	int x0 = 100;
-	int y0 = 100;
-	int x1 = 200;
-	int y1 = 100;
+	
 	/********************************/
 
 };
