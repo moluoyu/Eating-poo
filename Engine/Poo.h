@@ -6,9 +6,9 @@ class Poo
 public:
 	void Init(int x,int y,int vx,int vy);
 	void Update();
-	void ProcessConsumption(Dude& dude);
+	bool  TestCollision(const Dude& dude) const;
 	void Draw(Graphics& gfx);
-	bool IsEaten()const;
+	
 private:
 	int  x;
 	int  y;

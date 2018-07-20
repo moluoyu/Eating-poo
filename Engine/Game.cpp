@@ -23,13 +23,25 @@
 #include <random>
 #include "Dude.h"
 #include "Graphics.h"
+#include "Goal.h"
+/************************************************************************/
+/* 类初始化的顺序和构造函数初始化列表的顺序无关，与
+ * 成员变量在类中定义的顺序有关，注意看到在
+ * Game::Game( MainWindow& wnd)中，goal的初始化虽然写在了xDist后，
+ * 但在Game.h中，如果
+ * Goal goal;
+ * 写在
+ * std::random_device rd;之前，程序会崩溃， * * 
+ * /************************************************************************/
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
 	rng(rd()),
 	xDist(0,770),
-	yDist(0, 570)
+	yDist(0, 570),
+	goal(xDist(rng), yDist(rng)),
+	meter(40,40)
 {
 	for(auto & poo:poos)
 	{
@@ -50,17 +62,33 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-
-	if (isStarted)
+	goal.UpdateColors();
+	if (isStarted && !isGameOver)
 	{
 
 		dude.Update(wnd.kbd);
 		dude.ClampToScreen();
 		for (auto & poo : poos)
 		{
-				poo.Update();
-				poo.ProcessConsumption(dude);
+			poo.Update();
+			if (poo.TestCollision(dude))
+			{
+				isGameOver = true;
+
+			}
 		}
+		if (goal.TestCollision(dude))
+		{
+			goal.Respawn(xDist(rng), yDist(rng));
+			meter.IncreaseLevel();
+
+		}
+	}
+		/*for (auto & poo : poos)
+		{
+				poo.Update();
+				poo.TestCollision(dude);
+		}*/
 		/*	不能采用如下这种方式， 这种方式 using a copy ，并不会改变原值。
 		 *   Access by value using a copy declared as a specific type.
 		 *  Not preferred.
@@ -72,10 +100,6 @@ void Game::UpdateModel()
 				poo.ProcessConsumption(dude);
 			}
 		*/
-		
-
-
-	}
 	else
 	{
 		if (wnd.kbd.KeyIsPressed(VK_RETURN))
@@ -28446,44 +28470,29 @@ void Game::drawGameOver(int x,int y)
 }
 
 
- void  Game::ComposeFrame()
+void  Game::ComposeFrame()
 {
-	if(!isStarted)
+	if (!isStarted)
 	{
-
 		DrawTitleScreen(325, 211);
-
-
-
-
-		
 	}
 	else
 	{
-		bool allEaten = true;
-		for(const auto & poo:poos)
-		{
-			allEaten = allEaten && poo.IsEaten();
-		}
-
-		if (allEaten)
-		{
-			drawGameOver(gfx.ScreenWidth / 2, gfx.ScreenHeight / 2);
-		}
-
-		dude.Draw(gfx);
-
+		goal.Draw(gfx);
 		for (auto & poo : poos)
 		{
-			if(!poo.IsEaten())
-			{
-				poo.Draw(gfx);
-			}
+			poo.Draw(gfx);
 		}
-	
-	
+		dude.Draw(gfx);
+		if (isGameOver)
+		{
+			drawGameOver(358, 268);
+		}
 		
+		meter.Draw(gfx);
 	}
 	
-
 }
+
+
+

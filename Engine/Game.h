@@ -25,6 +25,8 @@
 #include "Graphics.h"
 #include "Poo.h"
 #include "Dude.h"
+#include "Goal.h"
+#include "Meter.h"
 #include <random>
 class Game
 {
@@ -48,15 +50,17 @@ private:
 	/********************************/
 	/*  User Variables              */
 	Dude dude;
+
 	std::random_device rd;
 	std::mt19937 rng;
 	std::uniform_int_distribution<int> xDist;
 	std::uniform_int_distribution<int> yDist;
-	static constexpr int nPoo = 100;
+	static constexpr int nPoo = 10;
 	Poo poos[nPoo];
-	
+	Goal goal;
+	Meter meter;
 	bool isStarted = false;
-	
+	bool isGameOver = false;
 	/********************************/
 
 };
