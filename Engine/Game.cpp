@@ -51,7 +51,7 @@ Game::Game( MainWindow& wnd )
 
 
 }
-
+ 
 void Game::Go()
 {
 	gfx.BeginFrame();	
@@ -28472,6 +28472,7 @@ void Game::drawGameOver(int x,int y)
 
 void  Game::ComposeFrame()
 {
+	gfx.DrawCircle(200, 200, 60,Colors::Red);
 	if (!isStarted)
 	{
 		DrawTitleScreen(325, 211);

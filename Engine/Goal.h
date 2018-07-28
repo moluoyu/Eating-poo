@@ -10,6 +10,7 @@ public:
 	{
 
 	}
+	
 	void Draw(Graphics& gfx)
 	{
 

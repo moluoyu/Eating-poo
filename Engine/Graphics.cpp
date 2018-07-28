@@ -239,6 +239,35 @@ Graphics::Graphics( HWNDKey& key )
 	pSysBuffer = reinterpret_cast<Color*>( 
 		_aligned_malloc( sizeof( Color ) * Graphics::ScreenWidth * Graphics::ScreenHeight,16u ) );
 }
+/**
+ * \method 
+ *
+ * \brief 
+ * 画实心圆思想：在圆外画一个正方形，判断正方形的点到圆心的距离是否小于radius(半径)
+ * \param 
+ * \param 
+ * \author thnx1
+ * \date 七月 2018
+ */
+void Graphics::DrawCircle(int x, int y, int radius, Color c)
+{
+	int rad_sq = radius * radius;
+	for (int y_loop= y-radius;y_loop<=y+radius;y_loop++)
+	{
+		for (int x_loop = x - radius; x_loop<=x + radius; x_loop++)
+		{
+			const int x_diff = x - x_loop;
+			const int y_diff = y - y_loop;
+			if(x_diff*x_diff + y_diff*y_diff<= rad_sq)
+			{
+				PutPixel(x_loop, y_loop, c);
+
+			}
+
+		}
+	}
+
+}
 
 Graphics::~Graphics()
 {
