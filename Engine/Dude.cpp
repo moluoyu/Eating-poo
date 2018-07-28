@@ -333,7 +333,7 @@ void Dude::Draw(Graphics & gfx)
 */
 void Dude::ClampToScreen()
 {
-	const int right = x + width;
+	const float right = x + width;
 	if (x < 0)
 	{
 
@@ -345,7 +345,7 @@ void Dude::ClampToScreen()
 
 	}
 	
-	const int bottom = y + height;
+	const float bottom = y + height;
 	if (y < 0)
 	{
 
@@ -359,21 +359,21 @@ void Dude::ClampToScreen()
 	
 }
 
-int Dude::GetX() const
+float Dude::GetX() const
 {
 	return x;
 }
 
-int Dude::GetY() const
+float Dude::GetY() const
 {
 	return y;
 }
 
-int Dude::GetWidth()
+float Dude::GetWidth()
 {
 	return   width;
 }
-int Dude:: GetHeight()
+float Dude:: GetHeight()
 {
 
 	return height;

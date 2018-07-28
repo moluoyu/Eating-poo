@@ -4,19 +4,19 @@
 class Poo
 {
 public:
-	void Init(int x,int y,int vx,int vy);
+	void Init(float x,float y,float vx,float vy);
 	void Update();
 	bool  TestCollision(const Dude& dude) const;
 	void Draw(Graphics& gfx);
 	
 private:
-	int  x;
-	int  y;
-	int vx;
-	int vy;
+	float x;
+	float y;
+	float vx;
+	float vy;
 	bool isEaten = false;
-	static constexpr int width = 24;
-	static constexpr int  height = 24;
+	static constexpr float width = 24;
+	static constexpr float  height = 24;
 	bool initialized = false;
 
 

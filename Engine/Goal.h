@@ -4,7 +4,7 @@
 class Goal
 {
 public:
-	Goal(int in_x,int in_y)
+	Goal(float in_x,float in_y)
 		:x(in_x),
 		y(in_y)
 	{
@@ -13,24 +13,24 @@ public:
 	void Draw(Graphics& gfx)
 	{
 
-		gfx.DrawRectDim(x, y, dimension, dimension, c);
+		gfx.DrawRectDim(int(x), int(y), int(dimension), int(dimension), c);
 		//gfx.DrawRect(290, 100, 300, 130, c);
 
 
 	}
 	bool  TestCollision(const Dude& dude) const
 	{
-			const int duderight = dude.GetX() + dude.GetWidth();
-			const int dudebottom = dude.GetY() + dude.GetHeight();
-			const int pooright = x + dimension;
-			const int poobottoom = y + dimension;
+			const float duderight = dude.GetX() + dude.GetWidth();
+			const float dudebottom = dude.GetY() + dude.GetHeight();
+			const float pooright = x + dimension;
+			const float poobottoom = y + dimension;
 
 			return (duderight >= x &&
 					dude.GetX() <= pooright &&
 					dudebottom >= y &&
 					dude.GetY() <= poobottoom);
 	}
-	void Respawn(int in_x,int in_y)
+	void Respawn(float in_x,float in_y)
 	{
 		x = in_x;
 		y = in_y;
@@ -67,10 +67,10 @@ public:
 	}
 private:
 	Color c = {15,32,23};
-	static constexpr int dimension = 40;
+	static constexpr float dimension = 40.0f;
 	bool colorIncreasing = true;
-	int x;
-	int y;
+	float x;
+	float y;
 };
 
 

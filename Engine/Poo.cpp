@@ -2,7 +2,7 @@
 #include "Graphics.h"
 #include <assert.h>
 #include <stdlib.h>
-void Poo::Init(int in_x, int in_y, int in_vx, int in_vy)
+void Poo::Init(float in_x, float in_y, float in_vx, float in_vy)
 {
 	assert(initialized == false);
 	x = in_x;
@@ -17,7 +17,7 @@ void Poo::Update()
 	x += vx;
 	y += vy;
 
-	const int right = x + width;
+	const float right = x + width;
 	//碰到左边界反弹
 	if (x < 0)
 	{
@@ -34,7 +34,7 @@ void Poo::Update()
 
 	}
 
-	const int bottom = y + height;
+	const float bottom = y + height;
 	//碰撞上边界反弹
 	if (y < 0)
 	{
